@@ -3,7 +3,7 @@ const Web3 = require('web3')
 var web3 = new Web3(Web3.givenProvider || 'HTTP://127.0.0.1:7545');
 var prompt = require('prompt-sync')();
 
-let user_account = undefined
+let user_account = undefined // supplier to sign transaction
 
 
 async function accounts () {
@@ -54,7 +54,8 @@ async function program () {
                 if (new_user_hash === undefined) {
                     console.log("There was an error creating an account")
             } else {
-                console.log(`User Hash: ${new_user_hash}`)
+                console.log('You have succesfully Signed in!')
+                console.log(`Your new User Hash (save it, you might need it in the future!): ${new_user_hash}`)
                 signin = true
             }
         
