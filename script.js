@@ -4,7 +4,7 @@ var web3 = new Web3(Web3.givenProvider || 'HTTP://127.0.0.1:7545');
 var prompt = require('prompt-sync')();
 
 let user_account = undefined // supplier to sign transaction
-
+let messages = {}  // {signature: message}
 
 async function accounts () {
     try {
@@ -104,7 +104,25 @@ async function program () {
 
 
 
-function sign_transaction(user_message) {
+async function sign_transaction(user_message) {
+
+    try {
+
+        let signing_password = prompt(`Password of Account ${user_account}: `)
+        let signed_hash = await web3.eth.personal.sign(
+            user_message,
+            user_account,
+            signing_password
+        )
+
+        messages[signed_hash] = user_message
+    } catch (err) {
+        console.log('There was an error sending the message')
+        console.log(err)
+        
+    }
+    
+
     
     
 }
