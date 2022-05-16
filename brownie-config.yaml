@@ -1,0 +1,14 @@
+dependicies:
+  - OpenZeppelin/openzeppelin-contracts@4.3.2
+compiler:
+  solc:
+    remappings:
+      - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.3.2"
+dotenv: .env
+networks: 
+  rinkeby:
+    gas_price: 0
+    max_fee: null
+    gas_limit: 0
+wallets:
+  from_key: ${PRIVATE_KEY}
