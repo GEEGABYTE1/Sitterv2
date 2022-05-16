@@ -1,6 +1,6 @@
 const { listenerCount } = require('process');
 const Web3 = require('web3')
-var web3 = new Web3(Web3.givenProvider || 'HTTP://127.0.0.1:7545');
+var web3 = new Web3(Web3.givenProvider || 'HTTP://0.0.0.0:7545');
 var prompt = require('prompt-sync')();
 
 let user_account = undefined // supplier to sign transaction
@@ -93,38 +93,38 @@ async function program () {
         
         // fetch_all_messages
         const user_prompt = prompt('Message: ')
-        sign_transaction(user_prompt)
+        await sign_transaction(user_prompt)
 
     
     }
     
 
 }
-
-
 
 
 async function sign_transaction(user_message) {
 
     try {
 
-        let signing_password = prompt(`Password of Account ${user_account}: `)
-        let signed_hash = await web3.eth.personal.sign(
+        let signed_hash = await web3.eth.sign(
             user_message,
             user_account,
-            signing_password
+            
         )
 
         messages[signed_hash] = user_message
+        console.log('Message sent successfully')
+        console.log(messages)
+        console.log('\n')
+        
     } catch (err) {
         console.log('There was an error sending the message')
         console.log(err)
-        
+
     }
     
 
     
     
 }
-
-program()
+ program()
