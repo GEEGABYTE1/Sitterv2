@@ -56,6 +56,7 @@ async function program () {
             } else {
                 console.log('You have succesfully Signed in!')
                 console.log(`Your new User Hash (save it, you might need it in the future!): ${new_user_hash}`)
+                user_account = new_user_hash
                 signin = true
             }
         
@@ -92,6 +93,7 @@ async function program () {
         
         // fetch_all_messages
         const user_prompt = prompt('Message: ')
+        sign_transaction(user_prompt)
 
     
     }
