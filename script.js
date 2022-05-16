@@ -92,12 +92,41 @@ async function program () {
 
         
         // fetch_all_messages
+        await ecRecover()
         const user_prompt = prompt('Message: ')
         await sign_transaction(user_prompt)
 
     
     }
     
+
+}
+
+async function ecRecover () {
+    let signatures = Object.keys(messages)
+    let messages_lst = Object.values(messages)
+    let common_idx = 0
+    
+    if (signatures.length !== 0) {
+        console.log('----------------------------')
+        try {
+            message = messages_lst[common_idx]
+            signature = signatures[common_idx]
+            resulting_acc = await web3.eth.accounts.recover(message,  signature)
+    
+            console.log(`User: ${resulting_acc}: `)
+            console.log(`${message}`)
+            console.log(`Signing Hash: ${signature}`)
+            common_idx ++
+            console.log('\n')
+        } catch (err) {
+            console.log(err)
+        }
+    } else {
+        console.log('There are no messages currently on the platform')
+    }
+
+
 
 }
 
@@ -119,7 +148,7 @@ async function sign_transaction(user_message) {
         
     } catch (err) {
         console.log('There was an error sending the message')
-        console.log(err)
+        console.log('Network is busy')
 
     }
     
