@@ -113,13 +113,25 @@ async function ecRecover () {
             message = messages_lst[common_idx]
             message_lst = message.split(' [')
             message = message_lst[0]
-            message_genre = message_lst[1]
+            let message_genre = undefined
+            try {
+                message_genre = message_lst[1]
+            if (message_lst[1] === undefined || message_lst[1] === '' || messages_lst[1] === ' ' || messages_lst === null) {
+                message_lst = undefined
+            }
+            } catch (err) {
+                message_genre = undefined
+            }
+            
             
             signature = signatures[common_idx]
             resulting_acc = await web3.eth.accounts.recover(message,  signature)
     
             console.log(`User: ${resulting_acc}: `)
             console.log(`${message}`)
+            if (message_genre === undefined) {
+                message_genre = 'None'
+            }
             console.log(`Genre: ${message_genre}`)
             console.log(`Signing Hash: ${signature}`)
             common_idx++
