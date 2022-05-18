@@ -111,13 +111,18 @@ async function ecRecover () {
         console.log('----------------------------')
         try {
             message = messages_lst[common_idx]
+            message_lst = message.split(' [')
+            message = message_lst[0]
+            message_genre = message_lst[1]
+            
             signature = signatures[common_idx]
             resulting_acc = await web3.eth.accounts.recover(message,  signature)
     
             console.log(`User: ${resulting_acc}: `)
             console.log(`${message}`)
+            console.log(`Genre: ${message_genre}`)
             console.log(`Signing Hash: ${signature}`)
-            common_idx ++
+            common_idx++
             console.log('\n')
         } catch (err) {
             console.log(err)
@@ -131,12 +136,15 @@ async function ecRecover () {
 }
 
 
-async function sign_transaction(user_message) {
+async function sign_transaction(user_message) {  // message ['genre']
+    let legit_string = legit_string.split(' [')
+    legit_string_message = legit_string[0]
+    
 
     try {
 
         let signed_hash = await web3.eth.sign(
-            user_message,
+            legit_string_message,
             user_account,
             
         )
