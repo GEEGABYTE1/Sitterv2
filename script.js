@@ -5,6 +5,7 @@ var prompt = require('prompt-sync')();
 
 let user_account = undefined // supplier to sign transaction
 let messages = {}  // {signature: message}
+let genres = []
 
 async function accounts () {
     try {
@@ -149,9 +150,16 @@ async function ecRecover () {
 
 
 async function sign_transaction(user_message) {  // message ['genre']
-    let legit_string = legit_string.split(' [')
+    let legit_string = user_message.split(' [')
     legit_string_message = legit_string[0]
-    
+    let genre = legit_string[1]
+    lowercase_genre = genre.toLowerCase();
+    if (lowercase_genre in genres) {
+        console.log('Genre is already made, so your message will be placed in an existing genre')
+    } else {
+        legit_string[1] = lowercase_genre
+    }
+
 
     try {
 
