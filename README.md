@@ -21,4 +21,4 @@ Evert user message will be sent to a local data structure of an object. There ar
 
 *Note*: There are times where the program will not sign the message. This is due to the activity of the local chain. At times, the local network may be busy along with the maximum capabilities of the Web3.js library. Therefore, if there is an error, the user *must* type their desired message again. 
 
-Users can also have their messages under a specific genre they can create
+Users can also have their messages under a specific genre they can create if it is already not made by typing their message like so: `*message* [genre] `. Failure to follow syntax will not send the message if the genre is not specified correctly.
