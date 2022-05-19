@@ -1,9 +1,16 @@
 
-const api_key = 'dbf3d5894a304a3b8c2861d160f1a63c'
+const api_key = undefined
 const NewsAPI = require('newsapi')
 const newsapi = new NewsAPI(api_key);
 var prompt = require('prompt-sync')();
 
+
+
+const api_key_setter = () => {
+    console.log('The Account must be a Paid Account')
+    key_prompt = prompt('NewsAPI Key: ')
+    api_key = key_prompt
+}
 
 const topHeadLines = (cat) => {
     newsapi.v2.everything({
@@ -22,7 +29,11 @@ const topHeadLines = (cat) => {
 
 
 const prompt_headline = () => {
+    if (api_key === undefined) {
+        api_key_setter()
+    }
     user_news_prompt = prompt('Topic: ')
-    topHeadLines(user_news_prompt)
+        topHeadLines(user_news_prompt)
+    
 }
 
