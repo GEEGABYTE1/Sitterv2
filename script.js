@@ -96,14 +96,22 @@ async function program () {
         // fetch_all_messages
         await ecRecover()
         const user_prompt = prompt('Message: ')
-    
-        if ('[' in user_prompt && ']' in user_prompt) {
-            await sign_transaction(user_prompt)
-        } else if ('[' in user_prompt === false || ']' in user_prompt === false) {
-            console.log(`You have typed your message incorrectly. Message: ${user_prompt} did not send`)
+
+        if (user_prompt === '/news') {
+            console.log('Prompting NewsAPI ... ')
+            console.log('\n')
+            prompt_headline()
         } else {
-            await sign_transaction(user_prompt)
+            if ('[' in user_prompt && ']' in user_prompt) {
+                await sign_transaction(user_prompt)
+            } else if ('[' in user_prompt === false || ']' in user_prompt === false) {
+                console.log(`You have typed your message incorrectly. Message: ${user_prompt} did not send`)
+            } else {
+                await sign_transaction(user_prompt)
+            }
         }
+    
+        
 
 
         
