@@ -2,6 +2,7 @@ const { listenerCount } = require('process');
 const Web3 = require('web3')
 var web3 = new Web3(Web3.givenProvider || 'HTTP://0.0.0.0:7545');
 var prompt = require('prompt-sync')();
+import prompt_headline from './news.js'
 
 let user_account = undefined // supplier to sign transaction
 let messages = {}  // {signature: message}

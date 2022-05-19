@@ -26,4 +26,3 @@ const prompt_headline = () => {
     topHeadLines(user_news_prompt)
 }
 
-prompt_headline()
